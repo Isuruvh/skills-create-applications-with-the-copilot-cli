@@ -1,5 +1,21 @@
 #!/usr/bin/env node
 
+function modulo(a, b) {
+  return a % b;
+}
+
+function power(base, exponent) {
+  return base ** exponent;
+}
+
+function squareRoot(n) {
+  if (n < 0) {
+    throw new Error('Cannot calculate the square root of a negative number.');
+  }
+
+  return Math.sqrt(n);
+}
+
 // Supported operations: addition (+), subtraction (-), multiplication (*), division (/),
 // modulo (%), exponentiation (^), and square root (sqrt).
 function calculate(leftOperand, operator, rightOperand) {
@@ -23,7 +39,7 @@ function calculate(leftOperand, operator, rightOperand) {
       if (operator === '%' && rightOperand === 0) {
         throw new Error('Cannot calculate modulo by zero.');
       }
-      const result = operator === '%' ? leftOperand % rightOperand : leftOperand ** rightOperand;
+      const result = operator === '%' ? modulo(leftOperand, rightOperand) : power(leftOperand, rightOperand);
       if (!Number.isFinite(result)) {
         throw new Error('The result must be a finite real number.');
       }
@@ -80,4 +96,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { calculate, run };
+module.exports = { calculate, modulo, power, run, squareRoot };
